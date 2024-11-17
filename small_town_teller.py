@@ -1,6 +1,3 @@
-from persistent_small_town_teller import PersistenceUtils
-
-
 class Person:
 
     def __init__(self, id, first_name, last_name):
