@@ -1,6 +1,26 @@
-from persistent_small_town_teller import PersistenceUtils
+import pickle
+import os
 
+class PersistenceUtils:
+    #---Save---
+    @staticmethod
+    def write_pickle(filename, data):
+        with open(filename, 'wb') as file:
+            pickle.dump(data, file)
+            print(f"{filename} Saved!")
 
+    #---Load---
+    @staticmethod
+    def load_pickle(filename):
+        if os.path.exists(filename):
+            with open(filename, 'rb') as file:
+                data = pickle.load(file)
+                print(f"{filename} loaded!")
+                return data
+        else:
+            print("file not found")
+            return {}
+        
 class Person:
 
     def __init__(self, id, first_name, last_name):
@@ -93,3 +113,15 @@ class Bank:
             print(f"Balance: ${account.balance:.2f}")
         else:
             print("account doesn't exist")
+
+
+    #---Saving---
+    def save_data(self):
+        PersistenceUtils.write_pickle('customers.pkl', self.customers)
+        PersistenceUtils.write_pickle('accounts.pkl', self.accounts)
+
+
+    #---Loading---
+    def load_data(self):
+        self.customers = PersistenceUtils.load_pickle('customers.pkl')
+        self.accounts = PersistenceUtils.load_pickle('accounts.pkl')
