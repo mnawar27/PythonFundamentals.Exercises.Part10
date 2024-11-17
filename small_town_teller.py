@@ -14,8 +14,17 @@ class Account:
         self.balance = balance
 
 class Bank:
-    def addCustomer():
-        pass
+
+    def __init__(self):
+        self.customers = {}
+
+    def addCustomer(self, id, first_name, last_name):
+        if id in self.customers:
+            print("already exists!")
+        else:
+            new_customer = Person(id,first_name, last_name)
+            self.customers[id] = new_customer
+            print(f"Added customer: {new_customer}")
 
     def addAccount():
         pass
